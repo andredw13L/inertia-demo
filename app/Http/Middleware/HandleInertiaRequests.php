@@ -37,7 +37,11 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
-            //
+            'auth' => [
+                'user' => [
+                    'username' => 'andredw13L'
+                ]
+            ]
         ];
     }
 }
