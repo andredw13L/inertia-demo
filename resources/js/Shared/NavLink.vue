@@ -6,13 +6,10 @@
         </Link>
 </template>
 
-<script>
+<script setup>
 import { Link } from '@inertiajs/vue3';
 
-    export default {
-        components: { Link },
-        props: {
+    defineProps({
             active: Boolean
-        }
-    }
+        });
 </script>
