@@ -13,6 +13,13 @@
     
     <AppSection>
         <div class="max-w-3xl mx-auto">
+            <iframe
+                class="mb-6" 
+                src='https://widget.spreaker.com/player?episode_id=42461607&theme=dark&chapters-image=true' 
+                width='100%' 
+                title='Fronteiras Invisíveis do Futebol #46 Trégua de Natal' 
+                frameborder='0'>
+            </iframe>
             <slot></slot>
         </div>
     </AppSection>
