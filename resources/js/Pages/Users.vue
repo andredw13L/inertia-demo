@@ -11,11 +11,9 @@
 
 <script>
 
-import Layout from '../Shared/Layout.vue';
 import { Link } from '@inertiajs/vue3';
 
 export default {
-    layout: Layout,
     props: { time: String },
     components: { Link }
 }
