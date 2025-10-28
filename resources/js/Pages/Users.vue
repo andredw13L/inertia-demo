@@ -1,4 +1,7 @@
 <template>
+    <Head>
+        <title>Users</title>
+    </Head>
     <h1 class="text-3xl font-bold">Users</h1>
     <div style="margin-top: 800px;">
         <p>The current time is {{ time }}.</p>
