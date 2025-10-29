@@ -17,7 +17,7 @@
                             {{ user.name }}
                         </span>
                         <Link :href="`/users/${user.id}/edit`"
-                            class="text-indigo-700 hover:text-indigo-900 text-sm font-medium transition">>
+                            class="text-indigo-700 hover:text-indigo-900 text-sm font-medium transition">
                         Edit
                         </Link>
                     </td>
@@ -35,22 +35,13 @@
     </div>
 
     <!--Paginator-->
-
-    <!--TODO: Refactoring e adicionar Link ao escopo global-->
-    <div class="mt-6">
-        <template v-for="link in users.links">
-            <Link :class="{ 'font-bold': link.active }" class="px-1" v-if="link.url" :href="link.url"
-                v-html="link.label">
-            </Link>
-            <span v-else v-html="link.label" class="text-gray-500"></span>
-        </template>
-    </div>
-
+    <Pagination :links="users.links" class="mt-6"></Pagination>
 
 </template>
 
 <script setup>
 
+import Pagination from '../Shared/Pagination.vue';
 
 defineProps({
     users: Object
