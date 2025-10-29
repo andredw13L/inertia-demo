@@ -4,9 +4,18 @@
         <title>Users</title>
     </Head>
 
-    <h1 class="text-3xl font-bold mb-6">Users</h1>
+    <div class="flex justify-between mb-6">
+        <h1 class="text-3xl font-bold">Users</h1>
+        <input
+            v-model="search"
+            type="text" 
+            name="search" 
+            placeholder="Search..." 
+            class="border px-2 w-min rounded-lg border-gray-300" 
+        >
+    </div>
 
-    <div class="p-4">
+    <div class="mb-6">
         <table
             class="min-w-full border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow bg-white">
             <tbody v-if="users.data && users.data.length">
@@ -41,12 +50,20 @@
 
 <script setup>
 
+import { defineComponent, ref, watch } from 'vue';
 import Pagination from '../Shared/Pagination.vue';
+import { router } from '@inertiajs/vue3';
 
-defineProps({
-    users: Object
+const props = defineProps({
+    users: Object,
+    filters: Object
 })
 
+const search = ref(props.filters.search)
 
+
+watch(search, value => {
+    router.get('/users', { search: value }, {preserveState: true, replace: true})
+})
 
 </script>
