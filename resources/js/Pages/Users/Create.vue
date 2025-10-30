@@ -16,6 +16,8 @@
                     id="name" 
                     autocomplete="name"
                     required> 
+                    <!--TODO: Extrair para um component-->
+                    <div v-if="errors.name" v-text="errors.name"  style="font-size: 0.750rem;" class="text-red-500 mt-1"></div>
             </label>
         </div>
 
@@ -28,6 +30,7 @@
                     id="email"
                     autocomplete="email" 
                     required> 
+                    <div v-if="errors.email" v-text="errors.email"  style="font-size: 0.750rem;" class="text-red-500 mt-1"></div>
             </label>
 
         </div>
@@ -40,6 +43,7 @@
                     name="password" 
                     id="password" 
                     required> 
+                     <div v-if="errors.password" v-text="errors.password"  style="font-size: 0.750rem;" class="text-red-500 mt-1"></div>
             </label>
         </div>
 
@@ -58,6 +62,10 @@
 
 import { reactive } from 'vue';
 import { router } from '@inertiajs/vue3';
+
+defineProps({
+    errors: Object
+})
 
 let form = reactive({
     name: '',

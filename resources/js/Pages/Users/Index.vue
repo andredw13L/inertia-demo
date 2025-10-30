@@ -5,7 +5,11 @@
     </Head>
 
     <div class="flex justify-between mb-6">
-        <h1 class="text-3xl font-bold">Users</h1>
+        <div class="flex items-center">
+            <h1 class="text-3xl font-bold">Users</h1>
+            <Link href="/users/create" class="text-blue-500 ml-50">New user</Link>
+        </div>
+
         <input
             v-model="search"
             type="text" 
