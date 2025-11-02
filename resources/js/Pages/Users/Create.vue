@@ -17,7 +17,7 @@
                     autocomplete="name"
                     required> 
                     <!--TODO: Extrair para um component-->
-                    <div v-if="errors.name" v-text="errors.name"  style="font-size: 0.750rem;" class="text-red-500 mt-1"></div>
+                    <div v-if="form.errors.name" v-text="form.errors.name"  style="font-size: 0.750rem;" class="text-red-500 mt-1"></div>
             </label>
         </div>
 
@@ -30,7 +30,7 @@
                     id="email"
                     autocomplete="email" 
                     required> 
-                    <div v-if="errors.email" v-text="errors.email"  style="font-size: 0.750rem;" class="text-red-500 mt-1"></div>
+                    <div v-if="form.errors.email" v-text="form.errors.email"  style="font-size: 0.750rem;" class="text-red-500 mt-1"></div>
             </label>
 
         </div>
@@ -43,14 +43,18 @@
                     name="password" 
                     id="password" 
                     required> 
-                     <div v-if="errors.password" v-text="errors.password"  style="font-size: 0.750rem;" class="text-red-500 mt-1"></div>
+                     <div v-if="form.errors.password" v-text="form.errors.password"  style="font-size: 0.750rem;" class="text-red-500 mt-1"></div>
             </label>
         </div>
 
 
         <div class="mb-6">
-            <button type="submit" class=" cursor-pointer bg-blue-500 text-white font-bold rounded py-2 px-4 hover:bg-blue-700">
-            Submit
+            <button 
+                type="submit" 
+                class=" cursor-pointer bg-blue-500 text-white font-bold rounded py-2 px-4 hover:bg-blue-700"
+                :class="{'bg-green-800': form.processing}"
+                :disabled="form.processing" >
+                Submit
             </button>
 
         </div>
@@ -60,21 +64,17 @@
 
 <script setup>
 
-import { reactive } from 'vue';
-import { router } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/vue3';
 
-defineProps({
-    errors: Object
-})
-
-let form = reactive({
+let form = useForm({
     name: '',
     email: '',
     password: ''
 })
 
+
 let submit = () => {
-    router.post('/users', form)
+    form.post('/users')
 }
 
 </script>

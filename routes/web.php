@@ -35,7 +35,6 @@ Route::post('/users', function () {
 
     User::create($attributes);
 
-
     return redirect('/users');
 });
 
