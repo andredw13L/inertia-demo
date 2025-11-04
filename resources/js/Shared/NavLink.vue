@@ -1,5 +1,5 @@
 <template>
-    <Link class="text-black hover:underline" 
+    <Link class="text-black hover:underline cursor-pointer" 
         :class="{'font-bold underline': active}">
         <slot></slot>
     </Link>
