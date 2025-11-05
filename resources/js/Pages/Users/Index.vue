@@ -7,7 +7,7 @@
     <div class="flex justify-between mb-6">
         <div class="flex items-center">
             <h1 class="text-3xl font-bold">Users</h1>
-            <Link href="/users/create" class="text-blue-500 ml-50">New user</Link>
+            <Link v-if="can.createUser" href="/users/create" class="text-blue-500 ml-50">New user</Link>
         </div>
 
         <input
@@ -29,7 +29,7 @@
                         <span class="text-gray-900 font-sans text-base">
                             {{ user.name }}
                         </span>
-                        <Link :href="`/users/${user.id}/edit`"
+                        <Link  v-if="user.can.edit" :href="`/users/${user.id}/edit`"
                             class="text-indigo-700 hover:text-indigo-900 text-sm font-medium transition">
                         Edit
                         </Link>
@@ -61,7 +61,8 @@ import { debounce } from 'lodash';
 
 const props = defineProps({
     users: Object,
-    filters: Object
+    filters: Object,
+    can: Object
 })
 
 const search = ref(props.filters.search)

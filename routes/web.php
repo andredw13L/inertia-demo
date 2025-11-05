@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Request;
@@ -10,6 +11,7 @@ Route::get('login', [LoginController::class, 'create'])->name('login');
 Route::post('login', [LoginController::class, 'store'])->name('login');
 Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth');
 
+// TODO: Create a edit suer endpoint, view and handle authorization
 
 // TODO: Create a fallback route and page
 
@@ -32,9 +34,16 @@ Route::middleware('auth')->group(function () {
                 ->through(fn(User $user) => [
                     'id' => $user->id,
                     'name' => $user->name,
+                    'can' => [
+                        'edit' => Auth::user()->can('edit', $user)
+                    ]
                 ]),
 
-            'filters' => Request::only(['search'])
+            'filters' => Request::only(['search']),
+
+            'can' => [
+                'createUser' => Auth::user()->can('create', User::class)
+            ]
         ]);
     });
 
@@ -52,7 +61,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/users/create', function () {
         return Inertia::render('Users/Create');
-    });
+    })->can('create', 'App\\Models\User');
 
 
     Route::get('/settings', function () {
