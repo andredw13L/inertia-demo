@@ -16,7 +16,7 @@
                     id="name" 
                     autocomplete="name"
                     required> 
-                    <!--TODO: Extrair para um component-->
+                    <!--TODO: Make it a component-->
                     <div v-if="form.errors.name" v-text="form.errors.name"  style="font-size: 0.750rem;" class="text-red-500 mt-1"></div>
             </label>
         </div>
