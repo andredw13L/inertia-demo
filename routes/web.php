@@ -12,7 +12,7 @@ Route::get('login', [LoginController::class, 'create'])->name('login');
 Route::post('login', [LoginController::class, 'store'])->name('login');
 Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth');
 
-// TODO: Create a edit suer endpoint, view and handle authorization
+// TODO: Create a edit user endpoint, view and handle authorization
 
 // TODO: Create a fallback route and page
 
