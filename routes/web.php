@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Models\User;
+use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
@@ -18,7 +19,11 @@ Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth');
 Route::middleware('auth')->group(function () {
 
     Route::get('/', function () {
-        return Inertia::render('Home');
+        return Inertia::render('Home', [
+            'inspire' => [
+                'message' => Inspiring::quote()
+            ]
+        ]);
     });
 
     Route::get('/users', function () {

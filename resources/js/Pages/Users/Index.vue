@@ -54,7 +54,7 @@
 
 <script setup>
 
-import { defineComponent, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import Pagination from '../../Shared/Pagination.vue';
 import { router } from '@inertiajs/vue3';
 import { debounce } from 'lodash';
