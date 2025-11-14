@@ -6,9 +6,13 @@ use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
+
+    public function __construct(protected User $user) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -74,9 +78,12 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(Request $request, User $user)
     {
-        //
+
+        return Inertia::render('Users/Edit', [
+            'user' => $user->only('name', 'email', 'id')
+        ]);
     }
 
     /**
@@ -84,7 +91,19 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $attributes = $request->validate([
+            'name' => 'required|min:2|max:255',
+            'email' => 'required|email',
+            'password' => 'required|min:8'
+        ]);
+
+        $user->update([
+            'name' => $request->name, 
+            'email' => $request->email, 
+            'password' => $request->password
+        ]);
+
+        return redirect()->to('/users');
     }
 
     /**

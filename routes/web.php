@@ -13,7 +13,7 @@ Route::get('login', [LoginController::class, 'create'])->name('login');
 Route::post('login', [LoginController::class, 'store'])->name('login');
 Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth');
 
-// TODO: Create a edit user endpoint, view and handle authorization
+// TODO: Handle edit authorization and security
 
 // TODO: Create a fallback route and page
 
@@ -27,9 +27,7 @@ Route::middleware('auth')->group(function () {
         ]);
     });
 
-    Route::get('/users', [UserController::class, 'index']);
-
-    Route::post('/users', [UserController::class, 'store']);
+    Route::resource('/users', UserController::class);
 
     Route::get('/users/create', function () {
         return Inertia::render('Users/Create');
