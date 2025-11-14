@@ -50,7 +50,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, User $user)
+    public function store(Request $request)
     {
         $attributes = $request->validate([
             'name' => 'required|min:2|max:255',
@@ -58,7 +58,7 @@ class UserController extends Controller
             'password' => 'required|min:8'
         ]);
 
-        $user->create($attributes);
+        User::create($attributes);
 
         return redirect('/users');
     }
