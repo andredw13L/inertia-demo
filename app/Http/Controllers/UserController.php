@@ -6,10 +6,13 @@ use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
 
 class UserController extends Controller
 {
+
+    use AuthorizesRequests;
 
     public function __construct(protected User $user) {}
 
@@ -80,6 +83,8 @@ class UserController extends Controller
      */
     public function edit(Request $request, User $user)
     {
+
+        $this->authorize('edit', $user);
 
         return Inertia::render('Users/Edit', [
             'user' => $user->only('name', 'email', 'id')

@@ -13,7 +13,7 @@ Route::get('login', [LoginController::class, 'create'])->name('login');
 Route::post('login', [LoginController::class, 'store'])->name('login');
 Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth');
 
-// TODO: Handle edit authorization and security
+// TODO: Check for security vulnerabilities and redirect options
 
 // TODO: Create a fallback route and page
 
