@@ -75,7 +75,7 @@ const props = defineProps({
     }
 })
 
-console.log(props.user)
+
 
 
 let form = useForm({

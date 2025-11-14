@@ -97,11 +97,7 @@ class UserController extends Controller
             'password' => 'required|min:8'
         ]);
 
-        $user->update([
-            'name' => $request->name, 
-            'email' => $request->email, 
-            'password' => $request->password
-        ]);
+        $user->update($attributes);
 
         return redirect()->to('/users');
     }
