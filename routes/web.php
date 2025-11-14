@@ -29,17 +29,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/users', [UserController::class, 'index']);
 
-    Route::post('/users', function () {
-        $attributes = Request::validate([
-            'name' => 'required|min:2|max:255',
-            'email' => 'required|email',
-            'password' => 'required|min:8'
-        ]);
-
-        User::create($attributes);
-
-        return redirect('/users');
-    });
+    Route::post('/users', [UserController::class, 'store']);
 
     Route::get('/users/create', function () {
         return Inertia::render('Users/Create');

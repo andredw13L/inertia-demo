@@ -36,7 +36,7 @@ class UserController extends Controller
             'can' => [
                 'createUser' => Auth::user()->can('create', User::class)
             ]
-            ]);
+        ]);
     }
 
     /**
@@ -50,9 +50,17 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
-        //
+        $attributes = $request->validate([
+            'name' => 'required|min:2|max:255',
+            'email' => 'required|email',
+            'password' => 'required|min:8'
+        ]);
+
+        $user->create($attributes);
+
+        return redirect('/users');
     }
 
     /**
