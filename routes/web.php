@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Auth;
@@ -26,31 +27,7 @@ Route::middleware('auth')->group(function () {
         ]);
     });
 
-    Route::get('/users', function () {
-        return Inertia::render('Users/Index', [
-            'users' => User::query()
-                ->when(
-                    Request::input('search'),
-                    fn(object $query, string $search) =>
-                    $query->where('name', 'like', '%' . $search . '%')
-                )
-                ->paginate(10)
-                ->withQueryString()
-                ->through(fn(User $user) => [
-                    'id' => $user->id,
-                    'name' => $user->name,
-                    'can' => [
-                        'edit' => Auth::user()->can('edit', $user)
-                    ]
-                ]),
-
-            'filters' => Request::only(['search']),
-
-            'can' => [
-                'createUser' => Auth::user()->can('create', User::class)
-            ]
-        ]);
-    });
+    Route::get('/users', [UserController::class, 'index']);
 
     Route::post('/users', function () {
         $attributes = Request::validate([
