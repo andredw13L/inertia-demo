@@ -22,7 +22,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return Inertia::render('Home', [
             'inspire' => [
-                'message' => Inspiring::quote()
+                'message' => Cache::remember('Inspiring_quote', 5, function () {
+                    return Inspiring::quote();
+                }) 
             ]
         ]);
     });
